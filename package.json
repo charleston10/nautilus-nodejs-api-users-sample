@@ -1,0 +1,35 @@
+{
+  "name": "nautilus-nodejs-api-users-sample",
+  "version": "1.0.0",
+  "description": "Sample project for nautilus-nodejs-api-core",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env NODE_PATH=. npm run build && npm run migrate:up && forever start -c node build/index.ts",
+    "dev": "cross-env NODE_ENV=development nodemon",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rimraf ./build && tsc",
+    "sequelize": "cross-env NODE_PATH=. NODE_ENV=development sequelize",
+    "migrate:up": "npm run sequelize db:migrate",
+    "migrate:down": "npm run sequelize db:migrate:undo:all",
+    "migrate:revert": "npm run sequelize db:migrate:undo",
+    "seed": "npm run sequelize db:seed:all",
+    "lint": "eslint {src,test,config}/**/*.ts"
+  },
+  "keywords": [],
+  "author": "Charleston Anjos <charleston.anjos@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.1.0"
+  },
+  "dependencies": {
+    "cross-env": "^7.0.2",
+    "dotenv": "^8.2.0",
+    "forever": "^3.0.0",
+    "nautilus-nodejs-api-core": "^1.0.1",
+    "nodemon": "^2.0.4",
+    "rimraf": "^3.0.2",
+    "structure": "^2.0.0",
+    "ts-node": "^8.10.1",
+    "typescript": "^3.9.3"
+  }
+}
