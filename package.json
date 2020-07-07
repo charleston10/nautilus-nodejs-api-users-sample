@@ -4,7 +4,7 @@
   "description": "Sample project for nautilus-nodejs-api-core",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_PATH=. npm run build && npm run migrate:up && forever start -c node build/index.ts",
+    "start": "cross-env NODE_PATH=. npm run build && npm run migrate:up && node build/index.ts",
     "dev": "cross-env NODE_ENV=development nodemon",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rimraf ./build && tsc",
@@ -25,7 +25,8 @@
     "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
     "forever": "^3.0.0",
-    "nautilus-nodejs-api-core": "^1.0.1",
+    "mysql2": "^2.1.0",
+    "nautilus-nodejs-api-core": "^1.2.0",
     "nodemon": "^2.0.4",
     "rimraf": "^3.0.2",
     "structure": "^2.0.0",

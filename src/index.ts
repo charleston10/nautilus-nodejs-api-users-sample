@@ -1,3 +1,4 @@
+import path from 'path';
 import {
     container,
     application,
@@ -5,20 +6,39 @@ import {
     logger
 } from 'nautilus-nodejs-api-core';
 
-database
-    .register(container)
-    .loadEntity(`data\\local\\entities`, __dirname);
-
 application
     .register(container)
-    .loadValues(['data\\mappers', 'domain\\model'], __dirname)
-    .loadModules([
-        'data\\repository\\*.ts',
-        'domain\\usecase\\*.ts'
+    .loadValues([
+        path.join(`data`, `mappers`),
+        path.join(`domain`, `model`)
     ], __dirname)
-    .loadRoutes('presentation\\controllers\\*.ts', __dirname)
-    .loadDatabase(database)
-    .start(process.env.PORT || 3000)
+    .loadModules([
+        path.join(`data`, `repository`, `*.*`),
+        path.join(`domain`, `usecase`, `*.*`)
+    ], __dirname)
+    .loadRoutes(
+        path.join(`presentation`, `controllers`, `*.*`)
+        , __dirname)
+    .loadDatabase(
+        database
+            .register(container)
+            .configure({
+                host: process.env.DB_HOST,
+                dialect: process.env.DB_DIALECT,
+                database: process.env.DB_NAME,
+                username: process.env.DB_USERNAME,
+                password: process.env.DB_PASSWORD,
+                options: { logging: false }
+            })
+            .loadEntity(
+                path.join(`data`, `local`, `entities`)
+                , __dirname)
+    )
+    .loadMiddleware([
+        path.join(`core`, `middleware`)
+    ], __dirname)//load middlewares
+    .startDatabase()
+    .startServer(process.env.PORT || 3000)
     .catch((e: any) => {
         logger.error(e.stack);
         process.exit();
