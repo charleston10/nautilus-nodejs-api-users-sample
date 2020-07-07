@@ -11,9 +11,18 @@ Clone this repository `git clone https://github.com/charleston10/nautilus-nodejs
 
 Install all dependencies with ```npm install```
 
-Create database in your local PC and config .env with information of connection
+Add .env file with configs of your connection
 
-After and RUN
+```javascript
+DB_USERNAME=xxx
+DB_PASSWORD=xxx
+DB_NAME=xxx
+DB_HOST=xxx
+DB_PORT=xxx
+DB_DIALECT=xxxx
+```
+
+After RUN
 
 ```npm run dev```
 
