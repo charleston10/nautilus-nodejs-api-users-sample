@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_PATH=. npm run build && npm run migrate:up && node build/index.ts",
-    "dev": "cross-env NODE_ENV=development nodemon",
+    "dev": "cross-env NODE_ENV=development npm run migrate:up && cross-env NODE_ENV=development nodemon",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rimraf ./build && tsc",
     "sequelize": "cross-env NODE_PATH=. NODE_ENV=development sequelize",
